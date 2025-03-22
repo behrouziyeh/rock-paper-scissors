@@ -15,3 +15,10 @@ function getComputerChoice() {
             return;
     }
 }
+
+function getHumanChoice() {
+    let HumanChoice = prompt("rock, paper or scissors?", "");
+    if (HumanChoice.match(/rock/i)) return "rock";
+    if (HumanChoice.match(/paper/i)) return "paper";
+    if (HumanChoice.match(/scissors/i)) return "scissors";
+}
