@@ -28,17 +28,24 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
+    const rockControl = document.querySelector(".rock-control");
+    const paperControl = document.querySelector(".paper-control");
+    const scissorsControl = document.querySelector(".scissors-control");
+
+    const gameResult = document.querySelector(".game-result");
+    const roundResult = document.querySelector(".round-result");
+
     function playRound(humanChoice, computerChoice) {
         if (humanChoice === computerChoice) {
-            console.log(`Tie! ${humanChoice} can't beat ${computerChoice}`);
+            roundResult.textContent = (`Tie! ${humanChoice} can't beat ${computerChoice}`);
             return;
         }
         function humanWon() {
-            console.log(`You Won! ${humanChoice} beats ${computerChoice}`);
+            roundResult.textContent = (`You Won! ${humanChoice} beats ${computerChoice}`);
             humanScore += 1;
         }
         function humanLost() {
-            console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
+            roundResult.textContent = (`You Lose! ${computerChoice} beats ${humanChoice}`);
             computerScore += 1;
         }
         if (
@@ -54,8 +61,24 @@ function playGame() {
         }
     }
 
-    if (humanScore > computerScore) console.log("You Won the game!");
-    else console.log("You lost the game! Computer won!");
+    function playRock() {
+        playRound("rock", getComputerChoice());
+    }
+
+    function playPaper() {
+        playRound("paper", getComputerChoice());
+    }
+
+    function playScissors() {
+        playRound("scissors", getComputerChoice());
+    }
+
+    rockControl.addEventListener('click', playRock);
+    paperControl.addEventListener('click', playPaper);
+    scissorsControl.addEventListener('click', playScissors);
+
+    if (humanScore > computerScore) gameResult.textContent = ("You Won the game!");
+    else gameResult.textContent = ("You lost the game! Computer won!");
 }
 
 playGame();
