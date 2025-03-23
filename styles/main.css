@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+.game {
+    margin: 4rem;
+    display: flex;
+    flex-flow: column;
+    gap :2rem;
+    font-family: sans-serif;
+}
+
+.controls {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+}
+
+.control {
+    flex-grow: 1;
+    width: 8rem;
+    height: 8rem;
+    background: transparent;
+    display: block;
+    outline: 0;
+    border: 0.1rem solid black;
+    border-radius: 10rem;
+    transition: all 50ms ease-in-out;
+}
+
+.control:active {
+    background: gainsboro;
+}
+
+.results {
+    text-align: center;
+}
