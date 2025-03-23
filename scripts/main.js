@@ -23,6 +23,7 @@ function getHumanChoice() {
     if (humanChoice.match(/scissors/i)) return "scissors";
 }
 
+
 function playGame() {
     // initialize Human and Computer score
     let humanScore = 0;
@@ -36,17 +37,32 @@ function playGame() {
     const roundResult = document.querySelector(".round-result");
 
     function playRound(humanChoice, computerChoice) {
+        function updateScores() {
+            if (computerScore < 5 && humanScore < 5) {
+                gameResult.textContent = `Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            } else {
+                if (humanScore > computerScore)
+                    gameResult.textContent = `You Won the game! Computer was ${computerScore}`;
+                else gameResult.textContent = `You lost the game! Computer won! You were ${humanScore} but Computer was ${computerScore}`;
+                computerScore = 0;
+                humanScore = 0;
+            }
+        }
+
         if (humanChoice === computerChoice) {
-            roundResult.textContent = (`Tie! ${humanChoice} can't beat ${computerChoice}`);
+            roundResult.textContent = `Tie! ${humanChoice} can't beat ${computerChoice}`;
+            updateScores();
             return;
         }
         function humanWon() {
-            roundResult.textContent = (`You Won! ${humanChoice} beats ${computerChoice}`);
+            roundResult.textContent = `You Won! ${humanChoice} beats ${computerChoice}`;
             humanScore += 1;
+            updateScores();
         }
         function humanLost() {
-            roundResult.textContent = (`You Lose! ${computerChoice} beats ${humanChoice}`);
+            roundResult.textContent = `You Lose! ${computerChoice} beats ${humanChoice}`;
             computerScore += 1;
+            updateScores();
         }
         if (
             (humanChoice === "rock" && computerChoice === "scissors") ||
@@ -73,12 +89,9 @@ function playGame() {
         playRound("scissors", getComputerChoice());
     }
 
-    rockControl.addEventListener('click', playRock);
-    paperControl.addEventListener('click', playPaper);
-    scissorsControl.addEventListener('click', playScissors);
-
-    if (humanScore > computerScore) gameResult.textContent = ("You Won the game!");
-    else gameResult.textContent = ("You lost the game! Computer won!");
+    rockControl.addEventListener("click", playRock);
+    paperControl.addEventListener("click", playPaper);
+    scissorsControl.addEventListener("click", playScissors);
 }
 
 playGame();
